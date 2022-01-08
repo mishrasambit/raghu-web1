@@ -17,3 +17,29 @@
   color: black !important;
   font-weight: 700;
 }
+.reset-margin{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.side-nav-col{
+  color: white;
+  background-color: #754848;
+  padding:0;
+  height: 100vh;
+}
+.side-nav-item{
+  padding: 1rem !important;
+  cursor: pointer;
+  font-weight: 700;
+  color: white;
+  background-color: #754848;
+}
+
+.side-nav-item:hover{
+  color: white;
+  background-color: #be5a5a;
+}
+.side-nav-item.active{
+  color: white;
+  background-color: #854141;
+}

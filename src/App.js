@@ -1,12 +1,12 @@
-import logo from './logo.svg';
+
 import './App.scss';
 
-import FetchDataXls from './pages/FetchDataXls'
+import Page from './components/Page';
 
 function App() {
   return (
     <div className="App">
-      <FetchDataXls/>
+      <Page/>
     </div>
   );
 }

@@ -1,8 +1,9 @@
 import React from 'react'
-import {Form, Row, Table} from 'react-bootstrap'
+import { Table} from 'react-bootstrap'
 import XLSX from 'xlsx';
+import { object, array, string, number } from 'yup';
 
-import Page from '../components/Page'
+
 
 const FetchDataXls = () => {
     const [fileName, setFileName] = React.useState('Upload')
@@ -12,21 +13,97 @@ const FetchDataXls = () => {
         inputRef.current?.click();
     }
 
-    const validate=(data)=>{
-        return true;
-    }
-
-    const showData=(table)=>{
+    const transformJsonArray=(table)=>{
         //csv data is coming array or arrya 
         //we transform the data into a array of json 
         const jsondata = table.reduce((jsonarray, row, index)=>{
-            jsonarray.push({id: index+1, value: row[1] });
+            jsonarray.push({id: index+1, value: row[0] });
             return jsonarray;
         },[]);
+        return jsondata;
+    }
+
+    const validate=async (data)=>{
+        let result = true;
+        //get the first element
+        const firstElement = (data && data.length>0) && data[0];
+        if(firstElement){
+            //get the value
+            const value = firstElement.value;
+            if(value && value.length>0){
+                //get the pattern from value
+                const valuePattern = getPatternForValue(value);
+
+                const validationSchema = array(object({
+                    id: number().required(),
+                    value: string().required().matches(valuePattern)
+                })).min(1);
+                try {
+                    const validatedData = await validationSchema.validateSync(data);
+                    console.log(JSON.stringify(validatedData));
+                } catch (err) {
+                    console.log(JSON.stringify(err));
+                    result = false;
+                }  
+            }else{
+                result = false;
+            }                
+        }else{
+            result = false;
+        }          
+        return result;
+    }
+    const getFirstRegExp=(val)=>{
+        const regChar = new RegExp('[A-Z]');
+        const regNumeric = new RegExp('[0-9]');
+        let regEx = '';
+        if(regChar.test(val)){
+            regEx = '[A-Z]';
+        }else if(regNumeric.test(val)){
+            regEx = '[0-9]';
+        }
+        return regEx;
+    }
+    const getPatternForValue=(value)=>{
+        console.log(value);
+        const valueLength = value.length;
+        let valArray = value.split("");
+        let firstRegExString = getFirstRegExp(valArray[0])
+        let restRegexString = valArray.splice(1).reduce((aggr, val)=>{
+            //console.log(val)
+            const regChar = new RegExp('[A-Z]');
+            const regNumeric = new RegExp('[0-9]');
+            if(regChar.test(val) ){
+                aggr = aggr + '[A-Z0-9]'
+            }else if(regNumeric.test(val)){
+                aggr = aggr + '[A-Z0-9]'
+            }else{
+                aggr = aggr + `[${val}]`
+            }
+            //aggr+=val;
+            return aggr;
+        },'')
+        let regexString = firstRegExString+restRegexString;
+        console.log(regexString);
+        //get the pattern
+            //check if the value has color code
+            //check if there is asterik
+                //get two substring based on the asterik
+                //Take find the length of the first substring
+                    //find the pattern
+                //Take the length of the 2nd substring
+                    //find the pattern
+            //if no asterik
+                //Take the length
+                //find the pattern
+        return new RegExp(regexString);
+    }
+
+    const showData=(jsondata)=>{        
         console.log(JSON.stringify(jsondata));
         setTableJson(jsondata);
     }
-    const handleDisplayFileDetails=()=>{
+    const handleDisplayFileDetails= ()=>{
         const haveFile = inputRef.current?.files.length;
         if( inputRef.current?.files && haveFile >= 0 ){
             const selectedFile = inputRef.current.files[0];
@@ -39,7 +116,7 @@ const FetchDataXls = () => {
                 if(isCSVFile || isXLSFile || isXLSXFile){
                     setFileName(selectedFile.name);
                     const reader = new FileReader();
-                    reader.onload = event =>{
+                    reader.onload = async  event =>{
                         //parse data
                         const bstr = event.target.result;
                         const wb = XLSX.read(bstr, {type: 'binary'});
@@ -48,7 +125,13 @@ const FetchDataXls = () => {
                         const ws = wb.Sheets[wsname];
                         const csvdata = XLSX.utils.sheet_to_json(ws, {header: 1});
                         console.log(JSON.stringify(csvdata));
-                        validate(csvdata) && showData(csvdata)                        
+                        const transformedJson = transformJsonArray(csvdata);
+                        const validationResult = await validate(transformedJson);
+                        if(validationResult) showData(transformedJson);
+                        else {
+                            setFileName('Please try with valid file');
+                            setTableJson(undefined);
+                        }
                     }
                     reader.readAsBinaryString(selectedFile);
                 }else{
@@ -65,7 +148,7 @@ const FetchDataXls = () => {
     }
 
     return (
-        <Page>
+        <>
             
             <label className="mx-3">Upload your file (Allowed File type : .CSV, .XLSX, .XLS):</label>
             <input
@@ -101,7 +184,12 @@ const FetchDataXls = () => {
                 }
                 </tbody>
             </Table>
-        </Page>
+            <pre>
+                {
+                    JSON.stringify()
+                }
+            </pre>
+        </>
     )
 }
 
