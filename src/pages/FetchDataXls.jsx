@@ -36,8 +36,11 @@ const FetchDataXls = () => {
 
                 const validationSchema = array(object({
                     id: number().required(),
-                    value: string().required().matches(valuePattern)
-                })).min(1);
+                    value: string().required('Value can\'t be empty')
+                    .test('len', `Must be exactly ${value.length} characters in length`, val => val.length === value.length)
+                    .matches(valuePattern, `Value must match the pattern of ${valuePattern}`)
+                })).min(1).test('array size', 'List should not exceed 5000', arr=> arr.length<5)
+                .test('array size', 'List should not exceed 5000', arr=> arr.length<5);
                 try {
                     const validatedData = await validationSchema.validateSync(data);
                     console.log(JSON.stringify(validatedData));
@@ -54,14 +57,7 @@ const FetchDataXls = () => {
         return result;
     }
     const getFirstRegExp=(val)=>{
-        const regChar = new RegExp('[A-Z]');
-        const regNumeric = new RegExp('[0-9]');
-        let regEx = '';
-        if(regChar.test(val)){
-            regEx = '[A-Z]';
-        }else if(regNumeric.test(val)){
-            regEx = '[0-9]';
-        }
+        let regEx = `[${val}]`;
         return regEx;
     }
     const getPatternForValue=(value)=>{
