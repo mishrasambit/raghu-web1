@@ -37,8 +37,7 @@ const Sidebar = (props) => {
             {sideNavList.map((navitem)=>(
                 <Nav.Link key={navitem.id} eventKey={navitem.key} className="side-nav-item">
                     {navitem.text}</Nav.Link>
-            ))}
-            
+            ))}            
         </Nav>        
     )
 }
