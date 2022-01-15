@@ -10,13 +10,13 @@ const makeApiCall = async (url, body, token)=>{
     return new Promise((resolve, reject) => {
         if(body.username==='sambit') {
             setTimeout(
-                resolve({username: body.username, otherdata : 'logged-in'})
+                ()=>{resolve({username: body.username, otherdata : 'logged-in'})}
             , 3000)
         }
         else{
             setTimeout(
-                reject({message:"Please check username and password"})
-            , 2000)
+                ()=>{reject({message:"Please check username and password"})}
+            , 5000)
         } 
     })
 }
@@ -37,8 +37,11 @@ export const loginSlice = createSlice({
         
       },
       logout: (state) => {
-        
-      },
+        state.userData = undefined;
+        state.loading = false;
+        state.error = undefined;
+
+      }
     },
     extraReducers:{
         [signinApi.fulfilled]:(state, action)=>{

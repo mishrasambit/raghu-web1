@@ -1,24 +1,36 @@
-import React from 'react'
+import React, {useReducer} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {Card, Form, Stack, Button} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 
 import {signinApi} from '../redux/features/login/loginSlice';
 
+const initialState = {
+    username : '',
+    password : ''
+}
+
+const reducer=(state, action)=>{
+    switch (action.type) {
+        case 'update-username':
+          return {...state, username: action.payload};
+        case 'update-password':
+          return {...state, password: action.payload};
+        default:
+          throw new Error();
+      }
+}
+
 const Login = () => {
     const [errorMessage, setErrorMessage] = React.useState(undefined)
+    const [loginForm, formDispatch] = useReducer(reducer, initialState)
     const dispatch = useDispatch();
     const {userData, loading, error } = useSelector(state=>state.loginReducer);
     const navigate = useNavigate()
     const doLogin = async () => {
-        const formData = {
-            username : "sambit",
-            pasword : "sambit"
-        }
-        
+        setErrorMessage(undefined)       
         try{
-            dispatch(signinApi(formData));
-            
+            dispatch(signinApi(loginForm));            
         }catch(err){
             console.log("error")
             console.log(err)
@@ -28,8 +40,11 @@ const Login = () => {
         // if isUserLoggedIn turned to true redirect to /home
         if (userData && userData.otherdata==='logged-in') { 
             navigate("/home")
+        }else if(error){
+            setErrorMessage(error)
         }
-    }, [userData]);
+
+    }, [userData, error, loading]);
     return (
         <div>
             <Card className="p-6 d-flex justify-content-center">    
@@ -38,16 +53,19 @@ const Login = () => {
                     <Stack gap={3} className="d-flex flex-column">
                     <div>Login Form</div>
                     {errorMessage && <div>{errorMessage}</div>}
+                    {loading && <div>Loading...</div>}
                     <Form.Control
                         type="text"
                         id="inputPassword5"
                         aria-describedby="passwordHelpBlock"
+                        onChange={(e)=>formDispatch({type: 'update-username', payload: e.target.value})}
                     />
 
                     <Form.Control
                         type="password"
                         id="inputPassword5"
                         aria-describedby="passwordHelpBlock"
+                        onChange={(e)=>formDispatch({type: 'update-password', payload: e.target.value})}
                     />
                     <Stack gap={3} direction="horizontal" className="d-flex flex-column justify-content-around">
                         <Button variant="primary" onClick={doLogin}>Login</Button>
