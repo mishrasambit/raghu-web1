@@ -1,13 +1,17 @@
 import React from 'react'
-import { Table} from 'react-bootstrap'
+import { Table, Button} from 'react-bootstrap'
 import XLSX from 'xlsx';
 import { object, array, string, number } from 'yup';
+
+import ModalPopup from '../components/ModalPopup'
 
 
 
 const FetchDataXls = () => {
     const [fileName, setFileName] = React.useState('Upload')
     const [tableJson, setTableJson] = React.useState(undefined)
+    const [showConfirmModal, setShowConfirmModal] = React.useState(false)
+    const [uploading, setUploading] = React.useState(false)
     const inputRef = React.useRef(null);
     const handleUpload=()=>{
         inputRef.current?.click();
@@ -81,17 +85,6 @@ const FetchDataXls = () => {
         },'')
         let regexString = firstRegExString+restRegexString;
         console.log(regexString);
-        //get the pattern
-            //check if the value has color code
-            //check if there is asterik
-                //get two substring based on the asterik
-                //Take find the length of the first substring
-                    //find the pattern
-                //Take the length of the 2nd substring
-                    //find the pattern
-            //if no asterik
-                //Take the length
-                //find the pattern
         return new RegExp(regexString);
     }
 
@@ -143,10 +136,28 @@ const FetchDataXls = () => {
 
     }
 
+    const closeConfirmModal=()=>{
+        setShowConfirmModal(false)
+    }
+    const confirmAndSubmit=()=>{
+        setUploading(true)
+        setTimeout(()=>{
+            setUploading(false);
+            setShowConfirmModal(false)
+        }, 5000)
+    }
+    const confirmSubmission = ()=>{
+        if(tableJson && tableJson.length<2){
+            //do submission
+        }else{
+            setShowConfirmModal(true)
+        }
+    }
+
     return (
         <>
             
-            <label className="mx-3">Upload your file (Allowed File type : .CSV, .XLSX, .XLS):</label>
+            <label className="mx-3">Select Your File For Upload (Allowed File type : .CSV, .XLSX, .XLS):</label>
             <input
                 ref={inputRef}
                 onChange={handleDisplayFileDetails}
@@ -180,6 +191,16 @@ const FetchDataXls = () => {
                 }
                 </tbody>
             </Table>
+            <Button onClick={confirmSubmission}>
+                Upload Your File
+            </Button>
+            <ModalPopup show={showConfirmModal}
+             handleClose={closeConfirmModal}
+             handlePrimary={confirmAndSubmit} 
+             modalTitleText={"Upload confirmation"}
+             modalBodyText={"Records are more than 2000, Do you want to submit!"}
+             processing={uploading}
+             primaryButtonText={"Upload Data"}/>
             <pre>
                 {
                     JSON.stringify()

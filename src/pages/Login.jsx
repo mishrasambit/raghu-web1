@@ -1,6 +1,6 @@
 import React, {useReducer} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {Card, Form, Stack, Button} from 'react-bootstrap'
+import {Card, Form, Stack, Button, Spinner} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 
 import {signinApi} from '../redux/features/login/loginSlice';
@@ -43,8 +43,7 @@ const Login = () => {
         }else if(error){
             setErrorMessage(error)
         }
-
-    }, [userData, error, loading]);
+    }, [userData, error, loading, navigate]);
     return (
         <div>
             <Card className="p-6 d-flex justify-content-center">    
@@ -52,12 +51,11 @@ const Login = () => {
                 <Form className="mt-3 mb-3">
                     <Stack gap={3} className="d-flex flex-column">
                     <div>Login Form</div>
-                    {errorMessage && <div>{errorMessage}</div>}
-                    {loading && <div>Loading...</div>}
+                    {errorMessage ? <div>{errorMessage}</div>: <div style={{padding:"12px"}}></div>}                 
                     <Form.Control
                         type="text"
-                        id="inputPassword5"
-                        aria-describedby="passwordHelpBlock"
+                        id="inputUsername5"
+                        aria-describedby="usernameHelpBlock"
                         onChange={(e)=>formDispatch({type: 'update-username', payload: e.target.value})}
                     />
 
@@ -68,7 +66,9 @@ const Login = () => {
                         onChange={(e)=>formDispatch({type: 'update-password', payload: e.target.value})}
                     />
                     <Stack gap={3} direction="horizontal" className="d-flex flex-column justify-content-around">
-                        <Button variant="primary" onClick={doLogin}>Login</Button>
+                        <Button variant="primary" onClick={doLogin} disabled={loading}>
+                            {loading?<><Spinner animation="grow" size="sm"/>Trying login</>:<>Login</>}
+                        </Button>
                         <Button variant="outline-secondary" >Don't have an account? Sign up.</Button>
                     </Stack>  
                 </Stack>  
