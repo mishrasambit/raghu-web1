@@ -13,6 +13,7 @@ const FetchDataXls = () => {
     const [showConfirmModal, setShowConfirmModal] = React.useState(false)
     const [uploading, setUploading] = React.useState(false)
     const inputRef = React.useRef(null);
+    const [fileInputKey, setFileInputKey] = React.useState('f-key-'+new Date())
     const handleUpload=()=>{
         inputRef.current?.click();
     }
@@ -144,6 +145,10 @@ const FetchDataXls = () => {
         setTimeout(()=>{
             setUploading(false);
             setShowConfirmModal(false)
+            setFileInputKey(fileInputKey+new Date());
+            setFileName('Upload');
+            setTableJson(undefined)
+            
         }, 5000)
     }
     const confirmSubmission = ()=>{
@@ -159,6 +164,7 @@ const FetchDataXls = () => {
             
             <label className="mx-3">Select Your File For Upload (Allowed File type : .CSV, .XLSX, .XLS):</label>
             <input
+                key={fileInputKey}
                 ref={inputRef}
                 onChange={handleDisplayFileDetails}
                 className="d-none"

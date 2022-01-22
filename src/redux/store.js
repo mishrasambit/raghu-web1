@@ -1,11 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+//import loginReducer from "./features/login/loginSlice";
+//import authReducer from './login/LoginReducer';
+import rootReducer from './rootReducer'
 
-import loginReducer from "./features/login/loginSlice";
-import authReducer from './login/LoginReducer';
-
-export const store= configureStore({
-    reducer :{
-        loginReducer,
-        authReducer
-    }
-});
+export const store = createStore(
+    rootReducer,
+    applyMiddleware(thunk)
+);

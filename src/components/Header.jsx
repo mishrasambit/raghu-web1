@@ -1,14 +1,13 @@
-import React from 'react'
+import React ,{useEffect} from 'react'
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { useSelector, useDispatch } from 'react-redux'
+import {setBrandName} from '../redux/brand/BrandAction'
 
 const brandOptions = [
-    {
-        id: 1,
-        brandName : "Choose Brand"
-    },
+    
     {
         id: 2,
-        brandName : "K&G"
+        brandName : "KnG"
     },
     {
         id: 3,
@@ -25,7 +24,17 @@ const brandOptions = [
 ]
 
 const Header = () => {
-    const [brand, setBrand] = React.useState('Choose Brand')
+    const [brand, setBrand] = React.useState('KnG')
+    const dispatch = useDispatch();
+    const brandReducer = useSelector(state => state.brandReducer)
+    const setBrandValue=(brandName)=>{
+        setBrand(brandName)
+        dispatch(setBrandName(brandName))
+    }
+    useEffect(() => {
+        dispatch(setBrandName(brand))
+    }, [brand]);
+
     return (
         <header>
             <Navbar bg="custom-color" variant="dark" expand="lg">
@@ -36,7 +45,7 @@ const Header = () => {
                         <Nav className="me-auto" style={{ color: 'black', justifyContent: 'space-between', flexBasis: '100%'}}>
                             <NavDropdown title={brand} className="header-dropdown" id="basic-nav-dropdown">
                             {brandOptions.map((brandOption)=>(
-                                <NavDropdown.Item key={brandOption.id} onClick={()=>{setBrand(brandOption.brandName)}} >
+                                <NavDropdown.Item key={brandOption.id} onClick={()=>{setBrandValue(brandOption.brandName)}} >
                                     {brandOption.brandName}</NavDropdown.Item>
                             ))}
                                 {/* <NavDropdown.Item onClick={()=>{setBrand(Choose Brand)}} >Choose Brand</NavDropdown.Item>

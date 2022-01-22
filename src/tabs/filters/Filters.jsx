@@ -52,7 +52,7 @@ const Filters = () => {
                 ))}
             </Nav>
             {setTabContent(activeTab)}
-            <FetchDataXls/>
+            
         </div>
     )
 }
