@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Container, Navbar, Nav, NavDropdown, Form } from 'react-bootstrap'
+import { Container, Navbar, Nav, NavDropdown, Form, Button, Table } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 
 import {fetchDivisionFilter, setSelectedDivision} from '../../redux/filter/FilterAction'
@@ -27,24 +27,133 @@ const CreateNewFilter = () => {
     
     console.log("filterReducer:",filterReducer)
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', marginTop: '20px'}}>
-            <div>Select Division</div>
-            <Nav className="me-auto" style={{ color: 'black', justifyContent: 'space-between'}}>
-                <NavDropdown title={divisionDropDown?.selectedOption?divisionDropDown.selectedOption.Description:'Select a option'} className="header-dropdown filter-division" id="basic-nav-dropdown">
-                {/* {brandOptions.map((brandOption)=>(
-                    <NavDropdown.Item key={brandOption.id} onClick={()=>{setBrand(brandOption.brandName)}} >
-                        {brandOption.brandName}</NavDropdown.Item>
-                ))} */}
-                {divisionDropDown && divisionDropDown.data.map(ele=>(
-                            <NavDropdown.Item key={ele.DIVISION} onClick={()=>{
-                                dispatch(setSelectedDivision({brandName: brandReducer.brandName, selectedOption : ele}))
-                            }} >
-                            {ele.Description}</NavDropdown.Item>
-                        ))
-                }
-                
-                </NavDropdown>                         
-            </Nav>
+        <div style={{ display: 'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center', gap: '10px', marginTop: '20px'}}>
+            <div style={{ display: 'flex', justifyContent: 'left', gap: '10px'}}>
+                <div>
+                    Division
+                    <NavDropdown title={divisionDropDown?.selectedOption?divisionDropDown.selectedOption.Description:'Select a option'} className="header-dropdown filter-division" id="basic-nav-dropdown">
+                    {divisionDropDown && divisionDropDown.data.map(ele=>(
+                                <NavDropdown.Item key={ele.DIVISION} onClick={()=>{
+                                    dispatch(setSelectedDivision({brandName: brandReducer.brandName, selectedOption : ele}))
+                                }} >
+                                {ele.Description}</NavDropdown.Item>
+                            ))
+                    }
+                    </NavDropdown>
+                </div>   
+                <div>
+                    Buyer
+                    <NavDropdown title={divisionDropDown?.selectedOption?divisionDropDown.selectedOption.Description:'Select a option'} className="header-dropdown filter-division" id="basic-nav-dropdown">
+                    {divisionDropDown && divisionDropDown.data.map(ele=>(
+                                <NavDropdown.Item key={ele.DIVISION} onClick={()=>{
+                                    dispatch(setSelectedDivision({brandName: brandReducer.brandName, selectedOption : ele}))
+                                }} >
+                                {ele.Description}</NavDropdown.Item>
+                            ))
+                    }
+                    </NavDropdown>
+                </div> 
+            </div>
+
+            <Table responsive="lg">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>What to Compare</th>
+                        <th>Comparision</th>
+                        <th>Compare to</th>
+                        <th>Grouping</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Add filter(s): </th>
+                        <th>
+                            <NavDropdown title={divisionDropDown?.selectedOption?divisionDropDown.selectedOption.Description:'Select a option'} className="header-dropdown filter-division" id="basic-nav-dropdown">
+                                {divisionDropDown && divisionDropDown.data.map(ele=>(
+                                <NavDropdown.Item key={ele.DIVISION} onClick={()=>{
+                                    dispatch(setSelectedDivision({brandName: brandReducer.brandName, selectedOption : ele}))
+                                }} >
+                                {ele.Description}</NavDropdown.Item>
+                                ))
+                            }
+                            </NavDropdown>
+                        </th>
+                        <th>
+                            <NavDropdown title={divisionDropDown?.selectedOption?divisionDropDown.selectedOption.Description:'Select a option'} className="header-dropdown filter-division" id="basic-nav-dropdown">
+                                {divisionDropDown && divisionDropDown.data.map(ele=>(
+                                <NavDropdown.Item key={ele.DIVISION} onClick={()=>{
+                                    dispatch(setSelectedDivision({brandName: brandReducer.brandName, selectedOption : ele}))
+                                }} >
+                                {ele.Description}</NavDropdown.Item>
+                                ))
+                            }
+                            </NavDropdown>
+                        </th>
+                        <th>
+                            <Form.Control type="email" placeholder="Compare to" />
+                        </th>
+                        <th>
+                            <NavDropdown title={divisionDropDown?.selectedOption?divisionDropDown.selectedOption.Description:'Select a option'} className="header-dropdown filter-division" id="basic-nav-dropdown">
+                                {divisionDropDown && divisionDropDown.data.map(ele=>(
+                                <NavDropdown.Item key={ele.DIVISION} onClick={()=>{
+                                    dispatch(setSelectedDivision({brandName: brandReducer.brandName, selectedOption : ele}))
+                                }} >
+                                {ele.Description}</NavDropdown.Item>
+                                ))
+                            }
+                            </NavDropdown>
+                        </th>
+                        <th>
+                            <Button >Add</Button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Add filter(s): </th>
+                        <th>
+                            <NavDropdown title={divisionDropDown?.selectedOption?divisionDropDown.selectedOption.Description:'Select a option'} className="header-dropdown filter-division" id="basic-nav-dropdown">
+                                {divisionDropDown && divisionDropDown.data.map(ele=>(
+                                <NavDropdown.Item key={ele.DIVISION} onClick={()=>{
+                                    dispatch(setSelectedDivision({brandName: brandReducer.brandName, selectedOption : ele}))
+                                }} >
+                                {ele.Description}</NavDropdown.Item>
+                                ))
+                            }
+                            </NavDropdown>
+                        </th>
+                        <th>
+                            <NavDropdown title={divisionDropDown?.selectedOption?divisionDropDown.selectedOption.Description:'Select a option'} className="header-dropdown filter-division" id="basic-nav-dropdown">
+                                {divisionDropDown && divisionDropDown.data.map(ele=>(
+                                <NavDropdown.Item key={ele.DIVISION} onClick={()=>{
+                                    dispatch(setSelectedDivision({brandName: brandReducer.brandName, selectedOption : ele}))
+                                }} >
+                                {ele.Description}</NavDropdown.Item>
+                                ))
+                            }
+                            </NavDropdown>
+                        </th>
+                        <th>
+                            <Form.Control type="email" placeholder="Compare to" />
+                        </th>
+                        <th>
+                            <NavDropdown title={divisionDropDown?.selectedOption?divisionDropDown.selectedOption.Description:'Select a option'} className="header-dropdown filter-division" id="basic-nav-dropdown">
+                                {divisionDropDown && divisionDropDown.data.map(ele=>(
+                                <NavDropdown.Item key={ele.DIVISION} onClick={()=>{
+                                    dispatch(setSelectedDivision({brandName: brandReducer.brandName, selectedOption : ele}))
+                                }} >
+                                {ele.Description}</NavDropdown.Item>
+                                ))
+                            }
+                            </NavDropdown>
+                        </th>
+                        <th>
+                            <Button >Add</Button>
+                        </th>
+                    </tr>
+                </tbody>
+            </Table>
+            
             {/* <Form.Select aria-label="Default select example">
                 {divisionDropDown && divisionDropDown.data.map(ele=>(
                             <option value={ele.DIVISION} key={ele.DIVISION}  onChange={(event)=>{
@@ -56,6 +165,7 @@ const CreateNewFilter = () => {
                         ))
                 }
             </Form.Select> */}
+
             <SpinLoader loading={filterReducer.loading} />
         </div>
     )
