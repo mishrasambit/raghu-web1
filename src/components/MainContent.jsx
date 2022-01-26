@@ -42,7 +42,7 @@ const MainContent = (props) => {
                         <Row className="show-grid">
                             <Col xs={1} md={0}></Col>
                             <Col xs={4} md={12} style={{}}>
-                                <Card style={{ margin: "20px 0", height: "90vh" }}>
+                                <Card style={{ margin: "20px 0" }}>
                                     <Card.Body>
                                         {setMainContent(activeContent)}
                                         {/* <QuickLookup/>
