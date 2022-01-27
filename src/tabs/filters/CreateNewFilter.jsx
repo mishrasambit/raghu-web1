@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { NavDropdown, Form, Button, Table } from 'react-bootstrap'
+import { NavDropdown, Form, Button, Table, Badge } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 
 import {fetchDivisionFilter, setSelectedDivision} from '../../redux/filter/FilterAction'
@@ -100,15 +100,18 @@ const CreateNewFilter = () => {
         }
     }, [brandReducer, selectedFilterReducer]);
 
-    const addFilter=()=>{        
-        const data = {
-            whatToCompare : whatToCompareDropDown?.selectedOption,
-            groupingFilter: groupingFilterDropDown?.selectedOption,
-            comparisonOperator : comparisonOperatorDropDown?.selectedOption,
-            compareTo: compareToValue
+    const addFilter=()=>{  
+        if(whatToCompareDropDown?.selectedOption && groupingFilterDropDown?.selectedOption && comparisonOperatorDropDown?.selectedOption ){
+            const data = {
+                whatToCompare : whatToCompareDropDown?.selectedOption,
+                groupingFilter: groupingFilterDropDown?.selectedOption,
+                comparisonOperator : comparisonOperatorDropDown?.selectedOption,
+                compareTo: compareToValue
+            }
+            console.log("selectedFilter",data)
+            dispatch(addSelectedFilter({brandValue :brandReducer.brandName, data}))    
         }
-        console.log("selectedFilter",data)
-        dispatch(addSelectedFilter({brandValue :brandReducer.brandName, data}))
+
     }
 
     const removeFilter=(index)=>{
@@ -206,7 +209,9 @@ const CreateNewFilter = () => {
                     </tr>
                 </tbody>
             </Table>
-            
+            <h5>
+                <Badge bg="secondary">Selected Filter Item(s)</Badge>
+            </h5>
             <Table responsive="lg">
                 <thead>
                     <tr>

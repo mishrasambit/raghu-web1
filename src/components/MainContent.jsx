@@ -32,7 +32,7 @@ const MainContent = (props) => {
     }
     
     return (
-        <main style={{ backgroundColor: "#003049", height: "100vh" }}>
+        <main style={{ backgroundColor: "#003049"}}>
             <Row className="show-grid reset-margin">
                 <Col md={2} className="side-nav-col">
                     <Sidebar setMainContnet={setMainContentHandler}/>

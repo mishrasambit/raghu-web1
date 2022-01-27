@@ -25,7 +25,8 @@
   color: white;
   background-color: #754848;
   padding:0;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
 }
 .side-nav-item{
   padding: 1rem !important;

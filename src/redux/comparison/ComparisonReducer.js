@@ -35,7 +35,8 @@ export const fetchComparisonOperator= (brandName)=>{
     return async (dispatch) => {
         dispatch(comparisonOperatorReqeust())
         try{
-            const response = await axios.get(`http://localhost:8083/api/operator`)
+            //const response = await axios.get(`http://localhost:8083/api/operator`)
+            const response = await axios.get(`http://localhost:3003/comparisonOption`)
             const data = response.data
             dispatch(comparisonOperatorSuccess({brandName, data : {data: data}}))
         }catch(err){
