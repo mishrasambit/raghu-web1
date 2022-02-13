@@ -53,3 +53,85 @@
   border: 1px solid #181414;
   border-radius: 4px;
 }
+
+
+// simulation price change popup
+
+.simulation-popup-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.left-info{
+  display: flex;
+}
+.center-info{
+  display: flex;
+}
+.right-info{
+  display: flex;
+  flex-direction: column;
+}
+.list-text{
+  padding:3px !important;
+  font-size: 12px !important;
+}
+.list-content{
+  display: flex !important;
+  flex-direction: column;
+  gap: 3px;
+}
+.new-price-textbox{
+  font-size: 12px!important;
+  height: 28px!important;
+  width: 130px!important;
+}
+.newprice-buttons{
+  gap: 10px;
+  display: flex;
+}
+.new-price-button{
+  padding: 0px;
+  width: 60px;
+  font-size: 12px!important;
+}
+.font-size-12{
+  font-size: 12px !important;
+}
+.item-input{
+  display: flex!important;
+  align-items: center;
+  justify-content: space-between;
+  gap:5px
+}
+.filter-group{
+  flex-direction: row!important;
+}
+.filter-selection{
+  font-size: 12px!important;
+  height: 28px!important;
+  width: 100px!important;
+}
+.tool-button{
+  width: 100%;
+}
+.simulation-filter-dropdown > a{
+  padding: 3px;
+  border: 1px solid;
+  border-radius: 3px;
+  width: 100px;
+  min-width: 100px;
+  max-width: 100%;
+}
+
+.simulation-filter-dropdown > div {
+  width: 100px;
+  min-width: 100px;
+  max-width: 100%;
+  font-size: 12px;
+  padding: 3px;
+}
+.simulation-filter-dropdown > div > a{
+  padding: 3px;
+}
