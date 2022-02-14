@@ -56,7 +56,11 @@
 
 
 // simulation price change popup
-
+.simulation-container{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .simulation-popup-header{
   display: flex;
   justify-content: space-between;
@@ -76,6 +80,9 @@
 .list-text{
   padding:3px !important;
   font-size: 12px !important;
+}
+.list-heading{
+  font-weight: 500;
 }
 .list-content{
   display: flex !important;
@@ -134,4 +141,8 @@
 }
 .simulation-filter-dropdown > div > a{
   padding: 3px;
+}
+
+.simulation-table-font{
+  font-size: 9px;
 }

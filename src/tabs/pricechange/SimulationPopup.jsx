@@ -3,17 +3,17 @@ import { Button, Card, Form, ListGroup, NavDropdown, Table } from 'react-bootstr
 
 const SimulationPopup = () => {
   return (
-    <div className='container'>
+    <div className='simulation-container'>
         <div className='simulation-popup-header'>
             <div className='left-info'>
                 <Card className=''>
                     <ListGroup variant="flush">
-                        <ListGroup.Item className='list-text'>MDS: </ListGroup.Item>
-                        <ListGroup.Item className='list-text'>Simulation: </ListGroup.Item>
-                        <ListGroup.Item className='list-text'>Description: </ListGroup.Item>
-                        <ListGroup.Item className='list-text'>Buyer: </ListGroup.Item>
-                        <ListGroup.Item className='list-text'>Filter: </ListGroup.Item>
-                        <ListGroup.Item className='list-text'>Effective: </ListGroup.Item>
+                        <ListGroup.Item className='list-text list-heading'>MDS: </ListGroup.Item>
+                        <ListGroup.Item className='list-text list-heading'>Simulation: </ListGroup.Item>
+                        <ListGroup.Item className='list-text list-heading'>Description: </ListGroup.Item>
+                        <ListGroup.Item className='list-text list-heading'>Buyer: </ListGroup.Item>
+                        <ListGroup.Item className='list-text list-heading'>Filter: </ListGroup.Item>
+                        <ListGroup.Item className='list-text list-heading'>Effective: </ListGroup.Item>
                     </ListGroup>
                 </Card>
                 <Card className=''>
@@ -28,9 +28,10 @@ const SimulationPopup = () => {
                 </Card>
             </div>
             <div className='center-info'>
+                
                 <Card className=''>
                     <ListGroup variant="flush">
-                        <ListGroup.Item className='list-text' active>Method: </ListGroup.Item>
+                        <ListGroup.Item className='list-text list-heading'>Method: </ListGroup.Item>
                         <ListGroup.Item className='list-text'><Form.Check type={"radio"} name="method-radio" id='price-point-radio' label={'Price Point'} /></ListGroup.Item>
                         <ListGroup.Item className='list-text'><Form.Check type={"radio"} name="method-radio" id='percentage-radio' label={'Percentage'} /></ListGroup.Item>
                         <ListGroup.Item className='list-text'><Form.Check type={"radio"} name="method-radio" id='dollar-off-radio' label={'Dollar Off'} /></ListGroup.Item>
@@ -38,7 +39,7 @@ const SimulationPopup = () => {
                 </Card>
                 <Card className=''>
                     <ListGroup variant="flush">
-                        <ListGroup.Item className='list-text' active>Calculation:</ListGroup.Item>
+                        <ListGroup.Item className='list-text list-heading'>Calculation:</ListGroup.Item>
                         <ListGroup.Item className='list-text'><Form.Check type={"radio"} name="calculation-radio" id='calc-radio1' label={'% on Cur Tkt Price'} /></ListGroup.Item>
                         <ListGroup.Item className='list-text'><Form.Check type={"radio"} name="calculation-radio" id='calc-radio2' label={'% on CDF Retail'} /></ListGroup.Item>
                         <ListGroup.Item className='list-text'><Form.Check type={"radio"} name="calculation-radio" id='calc-radio3' label={'% on Perm Retail'} /></ListGroup.Item>
@@ -46,12 +47,12 @@ const SimulationPopup = () => {
                 </Card>
                 <Card className=''>
                     <ListGroup variant="flush">
-                        <ListGroup.Item className='list-text' active>New Price / Pct:</ListGroup.Item>
+                        <ListGroup.Item className='list-text list-heading'>New Price / Pct:</ListGroup.Item>
                         <ListGroup.Item className='list-text list-content'>
                             <Form.Control type="text" placeholder="New Price" className='new-price-textbox'/> 
                             <div className='newprice-buttons'>
-                                <Button variant="secondary" size="sm" className='new-price-button'>Update</Button>
-                                <Button variant="secondary" size="sm" className='new-price-button'>Undo</Button>
+                                <Button variant="primary" size="sm" className='new-price-button'>Update</Button>
+                                <Button variant="primary" size="sm" className='new-price-button'>Undo</Button>
                             </div>
                         </ListGroup.Item>
                         <ListGroup.Item className='list-text'>Liability Amt: </ListGroup.Item>
@@ -62,47 +63,97 @@ const SimulationPopup = () => {
                 <Card className=''>
                     <ListGroup horizontal>
                         <ListGroup.Item className='list-text item-input tool-button'>
-                        <Button variant="secondary" size="sm" className='font-size-12'>Print PDF</Button>
-                        <Button variant="secondary" size="sm" className='font-size-12'>Submit for Approval</Button>
-                        <Button variant="secondary" size="sm" className='font-size-12'>Help</Button>
+                        <Button variant="primary" size="sm" className='font-size-12'>Print PDF</Button>
+                        <Button variant="primary" size="sm" className='font-size-12'>Submit for Approval</Button>
+                        <Button variant="primary" size="sm" className='font-size-12'>Help</Button>
                         </ListGroup.Item>
                     </ListGroup>
                 </Card>
                 <Card className='filter-group'>
                     <ListGroup horizontal>
-                        <ListGroup.Item className='list-text item-input tool-button'>Filter:
+                        <ListGroup.Item className='list-text list-heading item-input tool-button'>
+                            Filter:
                         </ListGroup.Item>
                     </ListGroup>
                     <ListGroup>
-                        <ListGroup.Item className='list-text item-input'>
+                        <ListGroup.Item className='list-text item-input list-heading'>
                             Perm Retl Ending &nbsp; 
                             <NavDropdown
                             title="No .98 cent" className="simulation-filter-dropdown"
                             >
-                                <NavDropdown.Item href="#action/3.1">No .98 cent</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                                <NavDropdown.Item >No .98 cent</NavDropdown.Item>
+                                <NavDropdown.Item >Another action</NavDropdown.Item>
+                                <NavDropdown.Item >Something</NavDropdown.Item>
+                                <NavDropdown.Item >Separated link</NavDropdown.Item>
                             </NavDropdown>
                         </ListGroup.Item>
-                        <ListGroup.Item className='list-text item-input'>Last MD = <Form.Control type="text" placeholder="New Price" className='filter-selection'/> </ListGroup.Item>
-                        <ListGroup.Item className='list-text item-input'>Cur Tkt Price = <Form.Control type="text" placeholder="New Price" className='filter-selection'/> </ListGroup.Item>
+                        <ListGroup.Item className='list-text item-input list-heading'>
+                            Last MD = 
+                            <NavDropdown
+                            title="All" className="simulation-filter-dropdown"
+                            >
+                                <NavDropdown.Item >All</NavDropdown.Item>
+                                <NavDropdown.Item >Another action</NavDropdown.Item>
+                                <NavDropdown.Item >Something</NavDropdown.Item>
+                                <NavDropdown.Item >Separated link</NavDropdown.Item>
+                            </NavDropdown>
+                        </ListGroup.Item>
+                        <ListGroup.Item className='list-text item-input list-heading'>
+                            Cur Tkt Price = 
+                            <NavDropdown
+                            title="All" className="simulation-filter-dropdown"
+                            >
+                                <NavDropdown.Item >All</NavDropdown.Item>
+                                <NavDropdown.Item >Another action</NavDropdown.Item>
+                                <NavDropdown.Item >Something</NavDropdown.Item>
+                                <NavDropdown.Item >Separated link</NavDropdown.Item>
+                            </NavDropdown>
+                        </ListGroup.Item>
                     </ListGroup>
                     <ListGroup>
-                        <ListGroup.Item className='list-text item-input'>OHU {">"} <Form.Control type="text" placeholder="New Price" className='filter-selection'/> </ListGroup.Item>
-                        <ListGroup.Item className='list-text item-input'>MD CT = <Form.Control type="text" placeholder="New Price" className='filter-selection'/> </ListGroup.Item>
-                        <ListGroup.Item className='list-text item-input'>Color = <Form.Control type="text" placeholder="New Price" className='filter-selection'/> </ListGroup.Item>
+                        <ListGroup.Item className='list-text list-heading item-input'>
+                            OHU {">"} 
+                            <NavDropdown
+                            title="All" className="simulation-filter-dropdown"
+                            >
+                                <NavDropdown.Item >All</NavDropdown.Item>
+                                <NavDropdown.Item >Another action</NavDropdown.Item>
+                                <NavDropdown.Item >Something</NavDropdown.Item>
+                                <NavDropdown.Item >Separated link</NavDropdown.Item>
+                            </NavDropdown>
+                        </ListGroup.Item>
+                        <ListGroup.Item className='list-text list-heading item-input'>
+                            MD CT = 
+                            <NavDropdown
+                            title="All" className="simulation-filter-dropdown"
+                            >
+                                <NavDropdown.Item >All</NavDropdown.Item>
+                                <NavDropdown.Item >Another action</NavDropdown.Item>
+                                <NavDropdown.Item >Something</NavDropdown.Item>
+                                <NavDropdown.Item >Separated link</NavDropdown.Item>
+                            </NavDropdown>
+                        </ListGroup.Item>
+                        <ListGroup.Item className='list-text list-heading item-input'>
+                            Color = 
+                            <NavDropdown
+                            title="All" className="simulation-filter-dropdown"
+                            >
+                                <NavDropdown.Item >All</NavDropdown.Item>
+                                <NavDropdown.Item >Another action</NavDropdown.Item>
+                                <NavDropdown.Item >Something</NavDropdown.Item>
+                                <NavDropdown.Item >Separated link</NavDropdown.Item>
+                            </NavDropdown>
+                        </ListGroup.Item>
                     </ListGroup>
                 </Card>
 
             </div>
         </div>
         <div className='simulation-table-list'>
-            <Table  bordered hover responsive>
+            <Table  bordered hover responsive className='simulation-table-font'>
                 <thead>
                     <tr>
-                        <th>checkbox</th>
+                        <th>Check</th>
                         <th>Grp</th>
                         <th>Class</th>
                         <th>Class Desc</th>
@@ -122,6 +173,63 @@ const SimulationPopup = () => {
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td></td>
+                        <td>422</td>
+                        <td>44CY</td>
+                        <td>TALARICO CAP...</td>
+                        <td>25321-001</td>
+                        <td>7198</td>
+                        <td>STACY AD...</td>
+                        <td>40</td>
+                        <td>NAVY</td>
+                        <td>09/08/20</td>
+                        <td>33.00</td>
+                        <td>59.99</td>
+                        <td>39.99</td>
+                        <td>39.99</td>
+                        <td></td>
+                        <td>07/06/21</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>422</td>
+                        <td>44CY</td>
+                        <td>TALARICO CAP...</td>
+                        <td>25321-001</td>
+                        <td>7198</td>
+                        <td>STACY AD...</td>
+                        <td>40</td>
+                        <td>NAVY</td>
+                        <td>09/08/20</td>
+                        <td>33.00</td>
+                        <td>59.99</td>
+                        <td>39.99</td>
+                        <td>39.99</td>
+                        <td></td>
+                        <td>07/06/21</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>422</td>
+                        <td>44CY</td>
+                        <td>TALARICO CAP...</td>
+                        <td>25321-001</td>
+                        <td>7198</td>
+                        <td>STACY AD...</td>
+                        <td>40</td>
+                        <td>NAVY</td>
+                        <td>09/08/20</td>
+                        <td>33.00</td>
+                        <td>59.99</td>
+                        <td>39.99</td>
+                        <td>39.99</td>
+                        <td></td>
+                        <td>07/06/21</td>
+                        <td>1</td>
+                    </tr>
                     <tr>
                         <td></td>
                         <td>422</td>
