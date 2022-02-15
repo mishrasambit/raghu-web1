@@ -1,7 +1,10 @@
-import React from 'react'
-import { Table, Form } from 'react-bootstrap'
+import React, {useState} from 'react'
+import { Table, Form, Button  } from 'react-bootstrap'
+import ModalPopup from '../../components/ModalPopup'
+import UserSettings from './UserSettings/UserSettings'
 
 const ExistingFilters = () => {
+    const [userSettingPopup, setUserSettingPopup] = useState(false)
     return (
         
         <div style={{ display: 'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center', gap: '10px', marginTop: '20px'}}>
@@ -25,6 +28,9 @@ const ExistingFilters = () => {
                         <option value="3">Three</option>
                     </Form.Select>
                 </div>
+                <Button onClick={()=>{setUserSettingPopup(true)}}>
+                    Open User Settings
+                </Button>
             </div>
             <Table responsive="lg">
                 <thead>
@@ -47,6 +53,12 @@ const ExistingFilters = () => {
                     </tr>
                 </tbody>
             </Table>
+            <ModalPopup show={userSettingPopup}
+                handleClose={()=>{setUserSettingPopup(false)}}
+
+            >
+                <UserSettings/>
+            </ModalPopup>
         </div>
     )
 }
