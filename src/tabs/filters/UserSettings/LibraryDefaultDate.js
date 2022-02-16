@@ -9,7 +9,7 @@ const LibraryDefaultDate = () => {
       </p>
       <div className='d-flex justify-content-around'>
         <Form.Control type="date" className='input-box-small'/> 
-        <Button variant="primary" size="sm" className='new-price-button'>OK</Button>
+        <Button variant="primary" size="sm" className='popup-button'>OK</Button>
       </div>
     </div>
   )

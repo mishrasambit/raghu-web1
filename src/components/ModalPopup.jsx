@@ -1,10 +1,10 @@
 import React from 'react'
 import { Modal, Button, Spinner } from 'react-bootstrap'
 
-const ModalPopup = ({show, handleClose, handlePrimary, modalTitleText, modalBodyText, primaryButtonText, processing, children}) => {
+const ModalPopup = ({size="md", show, handleClose, handlePrimary, modalTitleText, modalBodyText, primaryButtonText, processing, children}) => {
     return (
         <>
-          <Modal show={show}
+          <Modal size={size} show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
@@ -12,7 +12,7 @@ const ModalPopup = ({show, handleClose, handlePrimary, modalTitleText, modalBody
             <Modal.Header >
                 <Modal.Title>{modalTitleText}</Modal.Title>
             </Modal.Header>
-            <Modal.Body className="d-flex align-items-center">
+            <Modal.Body className="d-flex align-items-center justify-content-center">
                 {!processing && modalBodyText}
                 {processing && <><Spinner animation="grow" size="lg"/>Processing</>}
                 {children && children}

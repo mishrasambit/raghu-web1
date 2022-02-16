@@ -6,13 +6,15 @@ import comparisonOperatorReducer from './comparison/ComparisonReducer'
 import selectedFilterReducer from './selectedFilter/selectedFilterReducer'
 import whatToCompareReducer from './whatToCompare/whatToCompareReducer'
 import groupingFilterReducer from './groupingFilter/groupingFilterReducer'
+import simulationApprovalReducer from './admin/ApproveSimulationReducer'
 const rootReducer = combineReducers({
     filterReducer : filterReducer,
     brandReducer,
     comparisonOperatorReducer,
     selectedFilterReducer,
     whatToCompareReducer,
-    groupingFilterReducer
+    groupingFilterReducer,
+    simulationApprovalReducer
 })
 
 export default rootReducer
